@@ -1,0 +1,21 @@
+.array-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 80vh;
+  margin-bottom: 1rem;
+}
+
+.array-bar {
+  width: 2px;
+  background-color: turquoise;
+  display: inline-block;
+  margin: 0.5px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
