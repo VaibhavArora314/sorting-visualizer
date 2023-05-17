@@ -136,9 +136,45 @@ function partition(array, start, end, animations) {
   return j;
 }
 
+function getHeapSortAnimations(array) {
+  if (array.length <= 1) return [];
+  let animations = [];
+
+  for (let i = Math.floor(array.length / 2 - 1); i >= 0; i--) {
+    heapify(array, array.length, i, animations);
+  }
+
+  for (let j = array.length - 1; j > 0; j--) {
+    animations.push([0, j, array[0], array[j], "s"]); // an extra element to indicate that after swapping element at jth pos is at correct pos
+    let temp = array[0];
+    array[0] = array[j];
+    array[j] = temp;
+
+    heapify(array, j, 0, animations);
+  }
+  return animations;
+}
+
+function heapify(array, size, i, animations) {
+  const l = 2 * i + 1,
+    r = 2 * (i + 1);
+  let largest = i;
+  if (l < size && array[largest] < array[l]) largest = l;
+  if (r < size && array[largest] < array[r]) largest = r;
+
+  if (largest != i) {
+    animations.push([i, largest, array[i], array[largest]]);
+    let temp = array[largest];
+    array[largest] = array[i];
+    array[i] = temp;
+    heapify(array, size, largest, animations);
+  }
+}
+
 export default {
   getMergeSortAnimations,
   getInsertionSortAnimations,
   getBubbleSortAnimations,
   getQuickSortAnimations,
+  getHeapSortAnimations,
 };
